@@ -11,33 +11,25 @@ Part I: Setting Up CSVServer and Troubleshooting
     * docker logs [container_id] >& part-1-logs
 Committed the changes including gencsv.sh, inputFile,README.md, part-1-cmd, part-1-output, and part-1-logs to GitHub.
 
-Part II: Prometheus Setup and Docker Compose
-1. Prometheus Setup:
-    * Added a prometheus.yml configuration file to the project directory under /solution/prometheus/.
-    * Configured Prometheus to scrape metrics from the CSVServer container at port 9300.
-2. Docker Compose Configuration:
-    * Modified the existing docker-compose.yaml file to integrate both CSVServer and Prometheus services.
-    * Ensured the Prometheus container would run alongside the CSVServer container and collect metrics.
-3. Verification:
-    * Ensured that Prometheus was successfully scraping the metrics from the CSVServer by accessing the Prometheus dashboard at http://localhost:9090.
-    * Verified that the CSVServer metrics were being collected and displayed correctly.
+Part II: Docker Compose Setup
+1. Deleted previously running container.
+2. Created docker-compose.yaml to run csvserver.
+3. Created .env file (csvserver.env) for environment variables: CSVSERVER_BORDER=Orange
+4. Ran the application using: docker-compose up -d
+5. Verified:
+    * App accessible at http://localhost:9393
+    * Data and styling were correctly applied from inputFile and environment variable.
 
-* Successfully integrated Prometheus with the CSVServer using Docker Compose.
-* Prometheus was able to collect and display metrics related to the CSVServer.
-* The solution worked as expected without any errors, and metrics were accessible in the Prometheus dashboard.
+Part III: Prometheus Integration
+Prometheus Setup:
+1. Created prometheus.yml config file under solution/prometheus/.
+2. Configured Prometheus to scrape csvserver metrics at port 9300
+Docker Compose Update:
+1. Extended docker-compose.yaml to include Prometheus service
+2. Ran Prometheus with CSVServer using: docker-compose up -d
+3. Verified:
+    * Prometheus dashboard at http://localhost:9090
+    * Queried csvserver_records, saw correct metrics line.
+    * Confirmed Prometheus successfully scrapes metrics.
 
-Part III: Final Testing and Validation
-1. Final Docker Compose Validation:
-    * Ran the complete Docker Compose setup with both CSVServer and Prometheus containers.
-    * Ensured that both services were up and running without issues ,confirmed with docker ps -a and docker logs
-2. Metrics Scraping Validation:
-    * Accessed the Prometheus web UI at http://localhost:9090 to check if the metrics from the CSVServer were being scraped correctly.
-    * Verified the targets in Prometheus to ensure CSVServer was listed and scraping metrics at port 9300.
-3. Access to CSVServer:
-    * Checked that the CSVServer application was accessible at http://localhost:9393 with the appropriate border set to "Orange".
-    * Ensured that the inputFile data generated earlier was displayed correctly in the web application.
-
-* The entire solution, including CSVServer and Prometheus monitoring, was working as expected.
-* Prometheus successfully collected metrics and displayed them in its dashboard.
-* The CSVServer application was accessible with the correct configurations  and the setup is ready .
 Committed the remianing changes  including updated README.md  to GitHub.
