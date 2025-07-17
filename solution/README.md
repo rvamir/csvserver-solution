@@ -1,4 +1,4 @@
-InfraCloud CSV Server Assignment
+ CSV Server Setup
 
 Part I: Setting Up CSVServer and Troubleshooting
 1. Pulled and ran the container: docker run -d --name csv_server infracloudio/csvserver:latest
